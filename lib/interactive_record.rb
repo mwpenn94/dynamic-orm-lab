@@ -58,9 +58,8 @@ class InteractiveRecord
         DB[:conn].execute(sql, name)
     end
 
-    def self.find_by(options={})
-        sql = "SELECT * FROM #{self.table_name} WHERE #{options.key} = ?, #{options.value}"
-        DB[:conn].execute(sql, options)
+    def self.find_by(options)
+        sql = "SELECT * FROM #{self.table_name} WHERE #{options.keys.first} = ?"
+        DB[:conn].execute(sql, "#{options.values.first}")
     end
-    #change
 end
